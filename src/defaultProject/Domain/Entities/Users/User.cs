@@ -1,11 +1,6 @@
 ﻿using Core.Persistence.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Entities.Users
+namespace Domain.Entities.Users
 {
     /// <summary>
     /// Tüm kullanıcıların tutulduğu tablodur.
@@ -16,7 +11,7 @@ namespace Application.Entities.Users
         {
         }
 
-        public User(int id, string name, string surname, string fullName, string userName, string password, DataStatus dataStatus, int? createdUserId, DateTime createdAt):this()
+        public User(int id, string name, string surname, string fullName, string userName, string password, string email, DataStatus dataStatus, int? createdUserId, int? updatedUserId, DateTime createdAt, DateTime updatedAt) :this()
         {
             Id = id;
             Name = name;
@@ -24,9 +19,12 @@ namespace Application.Entities.Users
             FullName = fullName;
             UserName = userName;
             Password = password;
+            Email = email;
             DataStatus = dataStatus;
             CreatedUserId = createdUserId;
+            UpdatedUserId = updatedUserId;
             CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
         }
 
         /// <summary>
@@ -58,6 +56,11 @@ namespace Application.Entities.Users
         /// Kullanıcı şifre bilgisidir.
         /// </summary>
         public string Password { get; set; }
+
+        /// <summary>
+        /// Kullanıcı email bilgisidir.
+        /// </summary>
+        public string Email { get; set; }
 
     }
 }

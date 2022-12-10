@@ -16,19 +16,31 @@ public class Entity
     public int? CreatedUserId { get; set; }
 
     /// <summary>
+    /// Kaydın güncelleyen kullanıcı bilgisidir.
+    /// </summary>
+    public int? UpdatedUserId { get; set; }
+
+    /// <summary>
     /// Kaydın oluşturulma tarih bilgisidir.
     /// </summary>
     public DateTime CreatedAt { get; set; }
+
+    /// <summary>
+    /// Kaydın güncelleştirilme tarih bilgisidir.
+    /// </summary>
+    public DateTime? UpdatedAt { get; set; }
 
     public Entity()
     {
     }
 
-    public Entity(DataStatus dataStatus, int? createdUserId, DateTime createdAt) : this()
+    public Entity(DataStatus dataStatus, int? createdUserId, int? updatedUserId,DateTime createdAt, DateTime updatedAt) : this()
     {
         DataStatus = dataStatus;
         CreatedUserId = createdUserId;
+        UpdatedUserId = updatedUserId;
         CreatedAt = createdAt;
+        UpdatedAt = updatedAt;
     }
 }
 

@@ -59,8 +59,10 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     }
 
     public async Task<TEntity> AddAsync(TEntity entity)
-    {
+    {  
         Context.Entry(entity).State = EntityState.Added;
+        entity.CreatedAt = DateTime.Now;
+        entity.DataStatus = DataStatus.Activated;
         await Context.SaveChangesAsync();
         return entity;
     }
@@ -68,13 +70,16 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     public async Task<TEntity> UpdateAsync(TEntity entity)
     {
         Context.Entry(entity).State = EntityState.Modified;
+        entity.UpdatedAt = DateTime.Now;
         await Context.SaveChangesAsync();
         return entity;
     }
 
     public async Task<TEntity> DeleteAsync(TEntity entity)
     {
-        Context.Entry(entity).State = EntityState.Deleted;
+        Context.Entry(entity).State = EntityState.Modified;
+        entity.CreatedAt = DateTime.Now;
+        entity.DataStatus = DataStatus.DeActivated;
         await Context.SaveChangesAsync();
         return entity;
     }
@@ -113,6 +118,8 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     public TEntity Add(TEntity entity)
     {
         Context.Entry(entity).State = EntityState.Added;
+        entity.CreatedAt = DateTime.Now;
+        entity.DataStatus = DataStatus.Activated;
         Context.SaveChanges();
         return entity;
     }
@@ -120,13 +127,16 @@ public class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IR
     public TEntity Update(TEntity entity)
     {
         Context.Entry(entity).State = EntityState.Modified;
+        entity.UpdatedAt = DateTime.Now;
         Context.SaveChanges();
         return entity;
     }
 
     public TEntity Delete(TEntity entity)
     {
-        Context.Entry(entity).State = EntityState.Deleted;
+        Context.Entry(entity).State = EntityState.Modified;
+        entity.CreatedAt = DateTime.Now;
+        entity.DataStatus = DataStatus.DeActivated;
         Context.SaveChanges();
         return entity;
     }

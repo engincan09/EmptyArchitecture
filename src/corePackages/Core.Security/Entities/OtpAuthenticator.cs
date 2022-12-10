@@ -4,6 +4,7 @@ namespace Core.Security.Entities;
 
 public class OtpAuthenticator : Entity
 {
+    public int? Id { get; set; }
     public int UserId { get; set; }
     public byte[] SecretKey { get; set; }
     public bool IsVerified { get; set; }
